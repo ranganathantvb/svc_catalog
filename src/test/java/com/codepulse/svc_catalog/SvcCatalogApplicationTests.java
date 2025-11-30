@@ -1,10 +1,10 @@
-package com.codepulse.catelog;
+package com.codepulse.svc_catalog;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class CatelogApplicationTests {
+class SvcCatalogApplicationTests {
 
 	@Test
 	void contextLoads() {

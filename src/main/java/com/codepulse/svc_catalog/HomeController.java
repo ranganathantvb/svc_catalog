@@ -1,4 +1,4 @@
-package com.codepulse.catelog;
+package com.codepulse.svc_catalog;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

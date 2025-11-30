@@ -49,7 +49,7 @@ dependencies {
 
 generateJava {
 	schemaPaths = ["${projectDir}/src/main/resources/graphql-client"]
-	packageName = 'com.codepulse.catelog.codegen'
+	packageName = 'com.codepulse.svc_catalog.codegen'
 	generateClient = true
 }
 
