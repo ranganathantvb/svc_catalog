@@ -1,40 +1,42 @@
-name: SonarCloud Scan
+name: CI + SonarCloud
 
 on:
   push:
-    branches:
-      - main
+    branches: [ "main" ]
   pull_request:
 
 jobs:
-  sonarcloud:
-    name: Run SonarCloud analysis
+  build-and-analyze:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout source
         uses: actions/checkout@v4
         with:
-          # full history -> better analysis & PR decoration
+          # full history is recommended for proper blame/PR analysis
           fetch-depth: 0
 
-      # 👇 Add your build step here (pick ONE that matches your stack)
-      # - name: Build project (Maven example)
-      #   run: mvn -B verify
-      #
-      - name: Build project (Gradle example)
-        run: ./gradlew build
-      #
-      # - name: Build project (Node example)
-      #   run: npm ci && npm test
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17   # change if your service uses another version
 
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarqube-scan-action@v6
+      - name: Cache Gradle
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      - name: Build & test
+        run: ./gradlew clean build --no-daemon
+
+      - name: Run SonarCloud analysis
+        run: ./gradlew sonar --no-daemon
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # needed for PR decoration
-        # If you DON'T use sonar-project.properties, uncomment args below:
-        # with:
-        #   args: >
-        #     -Dsonar.organization=ranganathantvb
-        #     -Dsonar.projectKey=ranganathantvb_svc_catalog
+          # GITHUB_TOKEN is available automatically; no need to define it here
