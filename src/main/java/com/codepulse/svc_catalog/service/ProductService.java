@@ -7,6 +7,7 @@ import com.codepulse.svc_catalog.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 @Service
 public class ProductService {
@@ -21,10 +22,15 @@ public class ProductService {
     }
 
     public List<Product> getAll() {
+        String debug = "debug";
         return productRepository.findAll();
     }
 
     public List<Product> getActive() {
+        // b assign some random value 0 to 5
+       
+       int a, b = ThreadLocalRandom.current().nextInt(0, 6);
+        a = 5 / b;
         return productRepository.findByActiveTrue();
     }
 
@@ -64,6 +70,7 @@ public class ProductService {
     }
 
     public void delete(Long id) {
+        
         productRepository.deleteById(id);
     }
 }
