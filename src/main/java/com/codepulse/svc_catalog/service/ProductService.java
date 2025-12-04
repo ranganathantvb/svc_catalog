@@ -63,7 +63,7 @@ public class ProductService {
 
         if (categoryId != null) {
             Category category = categoryRepository.findById(categoryId)
-                    .orElseThrow(() -> new RuntimeException("Category not found with id  " + categoryId));
+                    .orElseThrow(() -> new RuntimeException("Category not found with id :" + categoryId));
             existing.setCategory(category);
         }
 
