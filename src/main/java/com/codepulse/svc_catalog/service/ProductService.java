@@ -31,6 +31,7 @@ public class ProductService {
        
        int a, b = ThreadLocalRandom.current().nextInt(0, 6);
         a = 5 / b;
+        a =7-b;
         return productRepository.findByActiveTrue();
     }
 
@@ -62,7 +63,7 @@ public class ProductService {
 
         if (categoryId != null) {
             Category category = categoryRepository.findById(categoryId)
-                    .orElseThrow(() -> new RuntimeException("Category not found with id " + categoryId));
+                    .orElseThrow(() -> new RuntimeException("Category not found with id  " + categoryId));
             existing.setCategory(category);
         }
 
