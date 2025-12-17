@@ -9,6 +9,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.beans.factory.annotation.Value;
+import java.io.ByteArrayInputStream;
+import java.io.ObjectInputStream;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.util.Base64;
+import java.util.Random;
 
 import java.util.List;
 
@@ -128,6 +134,52 @@ public class UserController {
         // ❌ no pagination / limit
         return userStore.list();
     }
+
+    /**
+     * DEMO ONLY – SECURITY HOTSPOT
+     * Weak cryptographic algorithm (MD5).
+     */
+    @GetMapping("/demo/weak-hash")
+    public String weakHash(@RequestParam String input) throws Exception {
+        if (!insecureDemoEnabled) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+
+        MessageDigest md = MessageDigest.getInstance("MD5"); // Sonar usually flags this
+        byte[] digest = md.digest(input.getBytes(StandardCharsets.UTF_8));
+        return Base64.getEncoder().encodeToString(digest);
+    }
+
+    /**
+     * DEMO ONLY – SECURITY HOTSPOT
+     * Insecure randomness: java.util.Random is not suitable for security use cases.
+     */
+    @GetMapping("/demo/insecure-random")
+    public int insecureRandom() {
+        if (!insecureDemoEnabled) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+
+        return new Random().nextInt(); // Sonar often flags in security contexts
+    }
+
+
+    /**
+     * DEMO ONLY – SECURITY HOTSPOT
+     * Insecure deserialization API usage (ObjectInputStream).
+     */
+    @PostMapping("/demo/deserialize")
+    public String insecureDeserialize(@RequestBody byte[] data) throws Exception {
+        if (!insecureDemoEnabled) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+
+        try (ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(data))) {
+            Object obj = ois.readObject(); // Sonar frequently flags this
+            return "DEMO ONLY: deserialized type=" + obj.getClass().getName();
+        }
+    }
+
 
 
     @GetMapping("/{id}")
