@@ -30,9 +30,9 @@ public class UserController {
         this.userStore = userStore;
     }
 
-        /**
-     * DEMO ONLY – SECURITY ISSUE
-     *
+        /** 
+     * DEMO ONLY – SECURITY ISSUE ...
+     * 
      * Mass Assignment / Over-posting vulnerability.
      * Domain object is bound directly from the request body.
      * Client controls fields that should never be client-controlled.
@@ -49,7 +49,7 @@ public class UserController {
     }
  
     /**
-     * DEMO ONLY – SECURITY ISSUE
+     * DEMO ONLY – SECURITY ISSUE ..
      *
      * Broken Object Level Authorization (IDOR).
      * Any caller can fetch any user by ID.
