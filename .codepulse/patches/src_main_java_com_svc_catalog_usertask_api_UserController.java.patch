@@ -1,5 +1,5 @@
 --- a/src/main/java/com/svc_catalog/usertask/api/UserController.java
-+++ b/AI_src/main/java/com/svc_catalog/usertask/api/UserController.java
++++ b/src/main/java/com/svc_catalog/usertask/api/UserController.java
 @@ -148 +148 @@
 -        MessageDigest md = MessageDigest.getInstance("MD5");  // Sonar usually flags this
 +        MessageDigest md = MessageDigest.getInstance("SHA-256");  // Replaced MD5 with SHA-256
