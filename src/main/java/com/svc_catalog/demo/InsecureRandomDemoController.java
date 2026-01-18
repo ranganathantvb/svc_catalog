@@ -16,7 +16,7 @@ public class InsecureRandomDemoController {
     @GetMapping("/insecure-random")
     public String insecureRandomToken() {
         byte[] bytes = new byte[16];
-        new Random().nextBytes(bytes);
+        random.nextBytes(bytes);
         return Base64.getEncoder().encodeToString(bytes);
     }
 }
