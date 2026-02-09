@@ -1,0 +1,22 @@
+{
+  "workspace": "/Users/ranganathan/workspace/svc_catalog",
+  "branch": "Fix_sonar_issues_81",
+  "applied_count": 0,
+  "skipped_count": 1,
+  "applied": [],
+  "skipped": [
+    {
+      "file": "src/main/java/com/svc_catalog/demo/InsecureSecretDemoController.java",
+      "rule": "java:S6418",
+      "reason": "FILE_NOT_FOUND"
+    }
+  ],
+  "entries": [
+    {
+      "rule": "java:S6418",
+      "file": "src/main/java/com/svc_catalog/demo/InsecureSecretDemoController.java",
+      "status": "skipped",
+      "reason": "FILE_NOT_FOUND"
+    }
+  ]
+}
