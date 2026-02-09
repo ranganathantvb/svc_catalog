@@ -15,7 +15,7 @@ public class DemoInsecureController10 {
 
     @GetMapping("/s5445")
     public String s5445() throws IOException {
-        File tempFile = File.createTempFile("demo", ".tmp");
+        File tempFile = new File("/mySecureDirectory/" + System.currentTimeMillis() + ".tmp");
         return "ok:" + tempFile.getAbsolutePath();
     }
 }
