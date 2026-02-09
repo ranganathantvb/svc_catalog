@@ -5,7 +5,8 @@ public class InterruptedIgnoredExample {
         try {
             Thread.sleep(10);
         } catch (InterruptedException e) {
-            e.getMessage();
+            /* Clean up whatever needs to be handled before interrupting */
+            Thread.currentThread().interrupt();
         }
     }
 }
