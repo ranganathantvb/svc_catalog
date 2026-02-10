@@ -18,7 +18,7 @@ public class InsecureHashDemoController {
 
     @GetMapping("/weak-hash")
     public String weakHash(@RequestParam String input) throws NoSuchAlgorithmException {
-        MessageDigest md5 = MessageDigest.getInstance("MD5");
+        MessageDigest sha256 = MessageDigest.getInstance("SHA-256");
         byte[] digest = md5.digest(input.getBytes(StandardCharsets.UTF_8));
         return Base64.getEncoder().encodeToString(digest);
     }
