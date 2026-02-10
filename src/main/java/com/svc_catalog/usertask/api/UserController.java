@@ -160,7 +160,7 @@ public class UserController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
 
-        return new Random().nextInt(); // Sonar often flags in security contexts
+        return random.nextInt(); // Sonar often flags in security contexts
     }
 
 
