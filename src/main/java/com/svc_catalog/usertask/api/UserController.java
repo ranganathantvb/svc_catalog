@@ -145,7 +145,7 @@ public class UserController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
 
-        MessageDigest md = MessageDigest.getInstance("MD5"); // Sonar usually flags this
+        MessageDigest md = MessageDigest.getInstance("SHA-256"); // Sonar usually flags this
         byte[] digest = md.digest(input.getBytes(StandardCharsets.UTF_8));
         return Base64.getEncoder().encodeToString(digest);
     }
