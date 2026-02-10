@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/demo/insecure")
 @ConditionalOnProperty(prefix = "demo.insecure", name = "enabled", havingValue = "true")
 public class InsecureSecretDemoController {
-    private static final String DEMO_API_TOKEN = "sk_live_1234567890abcdef";
+    private static final String DEMO_API_TOKEN = System.getenv("DEMO_API_TOKEN");
 
     @GetMapping("/hardcoded-secret")
     public String hardcodedSecret() {
