@@ -14,7 +14,7 @@ public class PrintStackTraceController {
         try {
             throw new IllegalStateException("Sample error");
         } catch (Exception e) {
-            e.printStackTrace();
+            // Sensitive
             return "error";
         }
     }
